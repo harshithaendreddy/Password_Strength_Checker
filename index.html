@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #22154B;
+            background-size: 100% 100%;
+            background-position: center;
+            color: #fff;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            background-color: transparent;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .password-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            color: #000; /* Black text inside the container */
+        }
+
+        .password-input-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 100%;
+        }
+
+        input[type="password"], input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #togglePassword {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            color: #888;
+        }
+
+        #strengthMessage {
+            text-align: center;
+            font-size: 16px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        #strengthIcon {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+
+        .strong-border {
+            border: 2px solid green;
+        }
+
+        .weak-border {
+            border: 2px solid red;
+        }
+
+        .strong {
+            color: green;
+        }
+
+        .weak {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="password-container">
+            <div class="password-input-container">
+                <input type="password" id="password" placeholder="Enter your password" oninput="checkPasswordStrength()">
+                <span id="togglePassword">👁️</span>
+            </div>
+            <div id="strengthMessage">
+                <span id="strengthIcon"></span> <span id="messageText"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordField = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+
+            // Toggle the icon based on visibility
+            this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+
+        // Check password strength
+        function checkPasswordStrength() {
+            const password = document.getElementById("password").value;
+            const strengthIcon = document.getElementById("strengthIcon");
+            const messageText = document.getElementById("messageText");
+
+            if (password.length >= 8 && /[A-Z]/.test(password) && /[0-9]/.test(password) && /[!@#$%^&*]/.test(password)) {
+                // Strong password
+                strengthIcon.textContent = "✔️";
+                messageText.textContent = "Password is strong";
+                messageText.className = "strong";
+                document.getElementById("password").className = "strong-border";
+            } else {
+                // Weak password
+                strengthIcon.textContent = "❌";
+                messageText.textContent = "Password is weak";
+                messageText.className = "weak";
+                document.getElementById("password").className = "weak-border";
+            }
+        }
+    </script>
+</body>
+</html>
