@@ -55,3 +55,7 @@ JavaScript: Adds interactivity to the page.
 
 The checkPasswordStrength() function is used to evaluate the strength of the password.
 Event listeners handle the password visibility toggle and the password strength evaluation.
+
+
+![image](https://github.com/user-attachments/assets/bc52ec3e-78fc-415b-a405-052774110335)
+
